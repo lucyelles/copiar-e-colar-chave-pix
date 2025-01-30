@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copiar Chave Pix</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #00424A; /* cor do fundo */
+      background-image: url('https://drive.google.com/uc?export=view&id=1AnEr_EwGGkp5a5acrrTCeioFmAsuFfPn');
+      background-size: cover;
+      background-position: center;
+    }
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      padding: 20px 40px;
+      font-size: 24px;
+      background-color: #00424A; /* cor do botão ao carregar */
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .success {
+      color: #00424A;
+      font-size: 18px;
+      margin-top: 20px;
+      display: none;
+    }
+    .copied {
+      background-color: #28a745 !important;
+    }
+    .error {
+      color: red;
+      font-size: 18px;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <button id="copyButton" onclick="copyPixKey()">Copiar Chave Pix</button>
+  <p class="success" id="successMessage">Chave Pix copiada com sucesso!</p>
+  <p class="error" id="errorMessage">Erro ao copiar a chave Pix. Tente novamente.</p>
+</div>
+
+<script>
+  const pixKey = '33988273256'; /* chave Pix */
+
+  function copyPixKey() {
+    navigator.clipboard.writeText(pixKey).then(() => {
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+      const copyButton = document.getElementById('copyButton');
+      successMessage.style.display = 'block';
+      errorMessage.style.display = 'none';
+      copyButton.classList.add('copied');
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+        copyButton.classList.remove('copied');
+      }, 3000);
+    }).catch(err => {
+      const errorMessage = document.getElementById('errorMessage');
+      const successMessage = document.getElementById('successMessage');
+      errorMessage.style.display = 'block';
+      successMessage.style.display = 'none';
+      console.error('Erro ao copiar a chave Pix: ', err);
+    });
+  }
+</script>
+
+</body>
+</html>
 
